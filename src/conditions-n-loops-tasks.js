@@ -120,8 +120,50 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let decimals = '';
+  let ones = '';
+  if (Math.floor(num / 10) !== 0) {
+    for (let i = 0; i < Math.floor(num / 10); i += 1) {
+      decimals += 'X';
+    }
+  }
+
+  switch (num % 10) {
+    case 0:
+      break;
+    case 1:
+      ones = 'I';
+      break;
+    case 2:
+      ones = 'II';
+      break;
+    case 3:
+      ones = 'III';
+      break;
+    case 4:
+      ones = 'IV';
+      break;
+    case 5:
+      ones = 'V';
+      break;
+    case 6:
+      ones = 'VI';
+      break;
+    case 7:
+      ones = 'VII';
+      break;
+    case 8:
+      ones = 'VIII';
+      break;
+    case 9:
+      ones = 'IX';
+      break;
+    default:
+      break;
+  }
+
+  return decimals + ones;
 }
 
 /**
@@ -139,8 +181,39 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let finalStr = '';
+  const digitsArr = [
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+  ];
+
+  for (let i = 0; i < numberStr.length; i += 1) {
+    switch (numberStr[i]) {
+      case '-':
+        finalStr += 'minus';
+        break;
+      case '.':
+        finalStr += 'point';
+        break;
+      case ',':
+        finalStr += 'point';
+        break;
+      default:
+        finalStr += digitsArr[+numberStr[i]];
+        break;
+    }
+    if (numberStr[i + 1]) finalStr += ' ';
+  }
+  return finalStr;
 }
 
 /**
@@ -155,8 +228,17 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let result = true;
+
+  for (let i = 0; i < str.length / 2; i += 1) {
+    if (str[i] !== str[str.length - 1 - i]) {
+      result = false;
+      break;
+    }
+  }
+
+  return result;
 }
 
 /**
