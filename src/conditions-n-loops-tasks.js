@@ -255,8 +255,15 @@ function isPalindrome(str) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let resultPos = -1;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      resultPos = i;
+      break;
+    }
+  }
+  return resultPos;
 }
 
 /**
@@ -274,8 +281,20 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const numStr = `${num}`;
+  const numDigit = `${digit}`;
+
+  let result = false;
+
+  for (let i = 0; i < numStr.length; i += 1) {
+    if (numStr[i] === numDigit) {
+      result = true;
+      break;
+    }
+  }
+
+  return result;
 }
 
 /**
@@ -291,8 +310,27 @@ function isContainNumber(/* num, digit */) {
  *  [2, 3, 9, 5] => 2       => 2 + 3 === 5 then balance element is 9 and its index = 2
  *  [1, 2, 3, 4, 5] => -1   => no balance element
  */
-function getBalanceIndex(/* arr */) {
-  throw new Error('Not implemented');
+function getBalanceIndex(arr) {
+  if (arr.length === 1) return 0;
+  let result = -1;
+  let sumLeft = 0;
+  let sumRight = 0;
+  for (let i = 1; i < arr.length - 1; i += 1) {
+    for (let j = 0; j < i; j += 1) {
+      sumLeft += arr[j];
+    }
+    for (let j = i + 1; j < arr.length; j += 1) {
+      sumRight += arr[j];
+    }
+    if (sumLeft === sumRight) {
+      result = i;
+      break;
+    }
+    sumLeft = 0;
+    sumRight = 0;
+  }
+
+  return result;
 }
 
 /**
@@ -316,8 +354,55 @@ function getBalanceIndex(/* arr */) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  const mx = [];
+  for (let i = 0; i < size; i += 1) {
+    mx[i] = [];
+    for (let j = 0; j < size; j += 1) {
+      mx[i][j] = 0;
+    }
+  }
+  let num = 1;
+  let condition = true;
+  let curX = 0;
+  let curY = 0;
+  while (condition) {
+    condition = false;
+    while (Number.isFinite(mx[curY][curX]) && mx[curY][curX] === 0) {
+      mx[curY][curX] = num;
+      num += 1;
+      curX += 1;
+      condition = true;
+    }
+    curX -= 1;
+    curY += 1;
+    while (mx[curY] && mx[curY][curX] === 0) {
+      mx[curY][curX] = num;
+      num += 1;
+      curY += 1;
+      condition = true;
+    }
+    curY -= 1;
+    curX -= 1;
+    while (Number.isFinite(mx[curY][curX]) && mx[curY][curX] === 0) {
+      mx[curY][curX] = num;
+      num += 1;
+      curX -= 1;
+      condition = true;
+    }
+    curX += 1;
+    curY -= 1;
+    while (mx[curY] && mx[curY][curX] === 0) {
+      mx[curY][curX] = num;
+      num += 1;
+      curY -= 1;
+      condition = true;
+    }
+    curY += 1;
+    curX += 1;
+  }
+
+  return mx;
 }
 
 /**
